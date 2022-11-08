@@ -18,13 +18,14 @@ export const babylonInit = async (): Promise<void> => {
     const canvas = document.getElementById("renderCanvas") as HTMLCanvasElement;
     // Generate the BABYLON 3D engine
     let engine: Engine;
+
     if (engineType === "webgpu") {
         const webGPUSupported = await WebGPUEngine.IsSupportedAsync;
         if (webGPUSupported) {
-            const webgpu = engine = new WebGPUEngine(canvas, {
+            const webgpu = (engine = new WebGPUEngine(canvas, {
                 adaptToDeviceRatio: true,
                 antialiasing: true,
-            });
+            }));
             await webgpu.initAsync();
             engine = webgpu;
         } else {
